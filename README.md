@@ -64,6 +64,15 @@ And, create book with post
 
 `http://localhost:4567/books` with args `title` and `author`
 
+## Testing
+
+This application use minitest with unit and controller coverage, run:
+
+```bash
+RACK_ENV=test rake db:drop db:create db:migrate
+rake test
+```
+
 ## Conclusion
 
 This simple application demonstrates how to use Sinatra, ActiveRecord, and Faker to create a web application that manages books with random data.

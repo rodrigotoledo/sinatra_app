@@ -1,4 +1,5 @@
 require 'sinatra'
+require "sinatra/reloader"
 require 'json'
 require './config/database'
 require './lib/book'
