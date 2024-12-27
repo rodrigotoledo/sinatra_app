@@ -31,4 +31,18 @@ class BooksControllerTest < Minitest::Test
     assert_equal 201, last_response.status
     assert_includes last_response.body, '1984'
   end
+
+  def test_post_books_invalid_without_title
+    post '/books', { author: 'George Orwell' }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+
+    assert_equal 422, last_response.status
+    assert_includes last_response.body, 'Title can\'t be blank'
+  end
+
+  def test_post_books_invalid_without_author
+    post '/books', { title: '1984' }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+
+    assert_equal 422, last_response.status
+    assert_includes last_response.body, 'Author can\'t be blank'
+  end
 end

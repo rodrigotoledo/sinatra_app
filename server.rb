@@ -13,8 +13,13 @@ post '/books' do
   book_params = JSON.parse(request.body.read)
   book = Book.create(title: book_params['title'], author: book_params['author'])
 
-  status 201
-  book.to_json
+  if book.save
+    status 201
+    book.to_json
+  else
+    status 422
+    { error: book.errors.full_messages.join(', ') }.to_json
+  end
 end
 
 get '/books' do
