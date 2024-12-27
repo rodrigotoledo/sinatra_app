@@ -14,3 +14,9 @@ namespace :db do
     end
   end
 end
+
+task :test do
+  Dir.glob('test/**/*_test.rb').each do |test_file|
+    system("RACK_ENV=test bundle exec ruby #{test_file}")
+  end
+end
