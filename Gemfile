@@ -8,6 +8,8 @@ gem 'sqlite3'
 gem 'json'
 gem 'faker'
 gem 'puma'
+gem 'faye-websocket'
+gem 'eventmachine'
 
 group :test do
   gem 'minitest'
