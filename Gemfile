@@ -2,8 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-reloader'
-gem 'activerecord'
-gem 'sinatra-activerecord'
+gem 'sequel'
 gem 'sqlite3'
 gem 'faker'
 gem 'rack-cors'
@@ -15,3 +14,5 @@ group :test do
   gem 'minitest'
   gem 'rack-test'
 end
+
+gem "rackup", "~> 2.2"

@@ -1,6 +1,4 @@
 require 'minitest/autorun'
-require 'active_record'
-require_relative '../config/database'
 require_relative '../lib/book'
 class BookTest < Minitest::Test
 

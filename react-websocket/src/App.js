@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="App">
       <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
-      <h1>WebSocket tests with Sinatra and JSON</h1>
+      <h1>WebSocket tests with Sinatra, Sequel and JSON</h1>
       <main>
         <h2>Fill with book info</h2>
         <form onSubmit={handleSubmit}>
@@ -75,14 +75,14 @@ function App() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title of the book"
             required
-          />
+          />&nbsp;
           <input
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="Author of the book"
             required
-          />
+          />&nbsp;
           <button type="submit">Create Book</button>
         </form>
         <hr />

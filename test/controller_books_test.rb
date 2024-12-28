@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'rack/test'
 require_relative '../server'
-require_relative '../config/database'
+RACK_ENV='test'
 
 class BooksControllerTest < Minitest::Test
   include Rack::Test::Methods
