@@ -7,7 +7,7 @@ function App() {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:4567/books')
+    fetch('http://localhost:9292/books')
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
@@ -16,7 +16,7 @@ function App() {
         console.error('Error fetching books:', error);
       });
 
-    const socket = new WebSocket('ws://localhost:4567/ws');
+    const socket = new WebSocket('ws://localhost:9292/ws');
 
     socket.onopen = (event) => {
       console.log('Connected to WebSocket');
@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="App">
       <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
-      <h1>WebSocket tests with Sinatra and JSON</h1>
+      <h1>WebSocket tests with Sinatra, Sequel and JSON</h1>
       <main>
         <h2>Fill with book info</h2>
         <form onSubmit={handleSubmit}>
@@ -75,14 +75,14 @@ function App() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title of the book"
             required
-          />
+          />&nbsp;
           <input
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="Author of the book"
             required
-          />
+          />&nbsp;
           <button type="submit">Create Book</button>
         </form>
         <hr />
