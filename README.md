@@ -64,6 +64,24 @@ And, create book with post
 
 `http://localhost:4567/books` with args `title` and `author`
 
+## WS actions
+
+Using websocket its possible to create books in real time, first install a tool to run WS client with:
+
+```bash
+npm install -g wscat
+```
+
+And start the client with:
+
+```bash
+wscat -c ws://localhost:4567/ws
+```
+
+Inside the client you can create registers with:
+
+`{"action": "create_book", "title": "1984", "author": "George Orwell"}`
+
 ## Testing
 
 This application use minitest with unit and controller coverage, run:

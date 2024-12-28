@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testing with WS</title>
+  <script text="text/javascript">
+    var ws = new WebSocket('ws://'+window.location.hostname+':4567/ws');
+    ws.onopen = function(){
+      console.log('WS connected')
+    }
+
+    ws.onmessage = function(event){
+      console.log(event)
+      document.getElementById('books').innerHTML += "<p>"+JSON.stringify(event.data, null, 2)+"</p>";
+    }
+
+    ws.onclose = function(){
+      console.log('WS lost connection')
+    }
+
+    function sendMessage(){
+      var title = document.getElementById('title').value
+      var author = document.getElementById('author').value
+
+      var message = JSON.stringify({
+        title: title,
+        author: author
+      })
+
+      ws.send(message)
+    }
+
+  </script>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+  <h1>WebSocket tests with Sinatra and JSON</h1>
+  <h2>Fill with book info</h2>
+  <input type="text" id="title" placeholder="Title of book" /><br />
+  <input type="text" id="author" placeholder="Author of book" /><br />
+  <button type="submit" onclick="sendMessage()">Create book</button>
+  <hr />
+  <h3>Books</h3>
+  <div id="books">
+    <% @books.each do |book| %>
+      <pre><%=book.attributes.to_json%></pre>
+    <% end %>
+  </div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 require 'sinatra'
 require "sinatra/reloader"
 require 'json'
+require 'faye/websocket'
+require 'eventmachine'
 require './config/database'
 require './lib/book'
 
@@ -27,5 +29,25 @@ get '/books' do
 end
 
 get '/' do
-  fetch_books
+  @books = Book.all
+  erb :index
+end
+
+get '/ws' do
+
+  if Faye::WebSocket.websocket?(env)
+    ws = Faye::WebSocket.new(env)
+
+    ws.on :message do |event|
+      message = JSON.parse(event.data)
+      book = Book.create(title: message["title"], author: message["author"])
+      response = { status: "success", book: book.attributes }
+      ws.send(response.to_json)
+    end
+
+    ws.rack_response
+  else
+    @books = Book.all
+    erb :index
+  end
 end
