@@ -11,8 +11,27 @@
     }
 
     ws.onmessage = function(event){
-      console.log(event)
-      document.getElementById('books').innerHTML += "<p>"+JSON.stringify(event.data, null, 2)+"</p>";
+      var response = JSON.parse(event.data);
+      if (response.status === "create_book") {
+        var newBook = response.book;
+        var booksList = document.getElementById('books');
+        var bookItem = document.createElement('pre');
+        bookItem.textContent = JSON.stringify(newBook);
+        booksList.appendChild(bookItem);
+      }
+
+      if (response.action === "update_books") {
+        var booksList = document.getElementById('books');
+        booksList.innerHTML = '';
+
+        response.books.forEach(function(book) {
+          var bookItem = document.createElement('pre');
+          bookItem.textContent = JSON.stringify(book);
+          booksList.appendChild(bookItem);
+        });
+      }
+
+      booksList.scrollTop = booksList.scrollHeight;
     }
 
     ws.onclose = function(){
@@ -24,6 +43,7 @@
       var author = document.getElementById('author').value
 
       var message = JSON.stringify({
+        action: "create_book",
         title: title,
         author: author
       })
@@ -32,20 +52,22 @@
     }
 
   </script>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
 </head>
 <body>
   <h1>WebSocket tests with Sinatra and JSON</h1>
-  <h2>Fill with book info</h2>
-  <input type="text" id="title" placeholder="Title of book" /><br />
-  <input type="text" id="author" placeholder="Author of book" /><br />
-  <button type="submit" onclick="sendMessage()">Create book</button>
-  <hr />
-  <h3>Books</h3>
-  <div id="books">
-    <% @books.each do |book| %>
-      <pre><%=book.attributes.to_json%></pre>
-    <% end %>
-  </div>
+  <main>
+    <h2>Fill with book info</h2>
+    <input type="text" id="title" placeholder="Title of book" required />
+    <input type="text" id="author" placeholder="Author of book" required />
+    <button type="submit" onclick="sendMessage()">Create book</button>
+    <hr />
+    <h3>Books</h3>
+    <div id="books">
+      <% @books.each do |book| %>
+        <pre><%=book.attributes.to_json%></pre>
+      <% end %>
+    </div>
+  </main>
 </body>
 </html>

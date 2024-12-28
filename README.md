@@ -19,7 +19,7 @@ bundle install
 ### Create and migrate the database (if necessary)
 
 ```bash
-rake db:create db:migrate RACK_ENV=development
+rake db:drop db:create db:migrate RACK_ENV=development
 ```
 
 ## Configuration
