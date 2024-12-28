@@ -35,12 +35,6 @@ If you need seed with faker data run:
 rake db:seed_books RACK_ENV=development
 ```
 
-And access data with:
-
-```bash
-rake console
-```
-
 This task will create 10 books in the database with randomly generated titles and authors.
 
 ## Web access, with database
@@ -48,14 +42,14 @@ This task will create 10 books in the database with randomly generated titles an
 Finally you can access your server with:
 
 ```bash
-ruby server.rb
+rackup
 ```
 
-and http://localhost:4567/
+and http://localhost:9292/
 
 And, create book with post
 
-`http://localhost:4567/books` with args `title` and `author`
+`http://localhost:9292/books` with args `title` and `author`
 
 ## WS actions
 
@@ -68,7 +62,7 @@ npm install -g wscat
 And start the client with:
 
 ```bash
-wscat -c ws://localhost:4567/ws
+wscat -c ws://localhost:9292/ws
 ```
 
 Inside the client you can create registers with:

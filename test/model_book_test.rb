@@ -9,9 +9,9 @@ class BookTest < Minitest::Test
   end
 
   def test_book_creation_invalid_without_title
-    book = Book.create
-    refute book.valid?
-    assert_includes book.errors[:title], "can't be blank"
-    assert_includes book.errors[:author], "can't be blank"
+    book = Book.new
+    book.valid?
+    assert book.errors.has_key?(:author)
+    assert book.errors.has_key?(:title)
   end
 end

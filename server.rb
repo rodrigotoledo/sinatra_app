@@ -6,7 +6,7 @@ require 'eventmachine'
 require './lib/book'
 require './lib/web_socket_manager'
 require 'rack/cors'
-class MyApp < Sinatra::Base
+class Server < Sinatra::Base
   use Rack::Cors do
     allow do
       origins 'http://localhost:3000'
@@ -22,20 +22,20 @@ class MyApp < Sinatra::Base
 
   post '/books' do
     book_params = JSON.parse(request.body.read)
-    book = Book.create(title: book_params['title'], author: book_params['author'])
+    book = Book.new(title: book_params['title'], author: book_params['author'])
 
-    if book.save
+    if book.valid? && book.save
       status 201
-      book.to_json
+      book.to_hash.to_json
     else
       status 422
-      { error: book.errors.full_messages.join(', ') }.to_json
+      { error: book.errors.full_messages }.to_json
     end
   end
 
   get '/books' do
     fetch_books
-    @books.to_json
+    @books.map(&:to_hash).to_json
   end
 
   get '/' do
@@ -70,4 +70,3 @@ class MyApp < Sinatra::Base
     end
   end
 end
-MyApp.run!

@@ -7,7 +7,7 @@ function App() {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:4567/books')
+    fetch('http://localhost:9292/books')
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
@@ -16,7 +16,7 @@ function App() {
         console.error('Error fetching books:', error);
       });
 
-    const socket = new WebSocket('ws://localhost:4567/ws');
+    const socket = new WebSocket('ws://localhost:9292/ws');
 
     socket.onopen = (event) => {
       console.log('Connected to WebSocket');
