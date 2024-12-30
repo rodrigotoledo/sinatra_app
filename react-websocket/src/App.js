@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="App">
       <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
-      <h1>WebSocket tests with Sinatra, Sequel and JSON</h1>
+      <h1>WebSocket tests with Sinatra, Sequel and JSON (from react)</h1>
       <main>
         <h2>Fill with book info</h2>
         <form onSubmit={handleSubmit}>
