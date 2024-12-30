@@ -15,4 +15,4 @@ group :test do
   gem 'rack-test'
 end
 
-gem "rackup", "~> 2.2"
+gem "rackup"
