@@ -9,7 +9,7 @@ require 'rack/cors'
 class Server < Sinatra::Base
   use Rack::Cors do
     allow do
-      origins 'http://localhost:3000'
+      origins '*'
       resource '*',
         headers: :any,
         methods: [:get, :post, :options, :put, :delete]

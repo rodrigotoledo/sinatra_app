@@ -45,11 +45,11 @@ Finally you can access your server with:
 rackup
 ```
 
-and http://localhost:9292/
+and http://localhost:3001/
 
 And, create book with post
 
-`http://localhost:9292/books` with args `title` and `author`
+`http://localhost:3001/books` with args `title` and `author`
 
 ## WS actions
 
@@ -62,7 +62,7 @@ npm install -g wscat
 And start the client with:
 
 ```bash
-wscat -c ws://localhost:9292/ws
+wscat -c ws://localhost:3001/ws
 ```
 
 Inside the client you can create registers with:
